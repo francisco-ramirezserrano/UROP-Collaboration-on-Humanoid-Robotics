@@ -12,11 +12,11 @@ step 2) convert episodes:
 cd /media/data_18tb/workspace/unitree_IL_lerobot
 conda activate unitree_lerobot_gr00t
 
-# Point to the directory so the script sees the 'pick_pear_onto_plate' folder
+Point to the directory so the script sees the 'pick_pear_onto_plate' folder
 RAW_DATA_DIR="/media/data_18tb/workspace/xr_teleoperate/teleop/utils/data/pear_on_plate_v1_2026_03_21"
 REPO_ID="unitreerobotics/pear_on_plate_v1"
 
-# Run your ZED conversion script
+Run your ZED conversion script
 python unitree_lerobot/utils/convert_ZED_to_lerobot.py \
     --raw-dir "$RAW_DATA_DIR" \
     --repo-id "$REPO_ID" \
@@ -113,8 +113,8 @@ Step 8: Prepare Metadata (modality.json)
 The GR00T-LeRobot format requires a meta/modality.json file to map the raw data arrays to robot components. If your new task uses the same robot configuration as a previous one, you can copy the metadata.
 Bash
 
-# On the Cluster:
-# Copy modality metadata from a known working G1 task to the new pear task
+On the Cluster:
+Copy modality metadata from a known working G1 task to the new pear task
 cp /orcd/pool/004/framser/GROOT/datasets/bottle_plate_wood_curated/meta/modality.json \
    /orcd/pool/004/framser/GROOT/datasets/pear_on_plate_v1_curated/meta/
 
@@ -129,8 +129,8 @@ To test different performance profiles (Action Horizons of 8, 16, or 32) and con
 Important: For Relative control, you must explicitly link the action to the state by adding state_key="proprio" to the ActionConfig.
 Bash
 
-# Example for 8-step Relative Horizon
-# Save as: examples/G1Dex3/wrist-action8-Relative.py
+Example for 8-step Relative Horizon
+Save as: examples/G1Dex3/wrist-action8-Relative.py
 
 from gr00t.configs.data.embodiment_configs import register_modality_config
 from gr00t.data.types import ModalityConfig, ActionConfig, ActionRepresentation, ActionType, ActionFormat, EmbodimentTag
@@ -156,7 +156,7 @@ config = {
     "language": ModalityConfig(delta_indices=[0], modality_keys=["task"]),
 }
 
-# Registering the config under the NEW_EMBODIMENT tag
+Registering the config under the NEW_EMBODIMENT tag
 register_modality_config(config, embodiment_tag=EmbodimentTag.NEW_EMBODIMENT)
 
 Step 10: Generate Dataset Statistics (The "Horizon Lock")
@@ -167,19 +167,19 @@ Before training, you must run the stats script. This looks at your dataset throu
 
 Python
 
-# Run via a targeted Python snippet to bypass environment/library conflicts
+Run via a targeted Python snippet to bypass environment/library conflicts
 import importlib.util
 from pathlib import Path
 from gr00t.data.stats import main
 from gr00t.data.types import EmbodimentTag
 
-# 1. Load your specific config
+1. Load your specific config
 cfg_path = Path("examples/G1Dex3/wrist-action8-Relative.py")
 spec = importlib.util.spec_from_file_location("tmp_cfg", cfg_path)
 mod = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(mod)
 
-# 2. Generate stats
+2. Generate stats
 main(
     "/orcd/pool/004/framser/GROOT/datasets/pear_on_plate_v1_curated",
     EmbodimentTag.NEW_EMBODIMENT,
@@ -222,14 +222,14 @@ Step 12: Copy Finetuned Checkpoint & Metadata from Cluster
 To run evaluations or deploy the model locally, you need to pull both the trained weights and the dataset metadata from the cluster. Crucially, we exclude the optimizer.pt file to save ~12GB of transfer time, as it is only needed if you plan to resume training.
 Bash
 
-# 1. Create the local destination folder for the checkpoint
+1. Create the local destination folder for the checkpoint
 mkdir -p /media/data_18tb/workspace/model_weights/runs/pear_8rel_smoke_test/checkpoint-2000
 
-# 2. Pull the model weights and config files (ignoring the heavy optimizer/scheduler files)
+2. Pull the model weights and config files (ignoring the heavy optimizer/scheduler files)
 scp framser@orcd-login.mit.edu:/orcd/pool/004/framser/GROOT/runs/pear_8rel_smoke_test/checkpoint-2000/*.{json,safetensors,yaml} \
   /media/data_18tb/workspace/model_weights/runs/pear_8rel_smoke_test/checkpoint-2000/
 
-# 3. Pull the corrected dataset metadata (modality.json, tasks.jsonl, and relative stats)
+3. Pull the corrected dataset metadata (modality.json, tasks.jsonl, and relative stats)
 scp -r framser@orcd-login.mit.edu:/orcd/pool/004/framser/GROOT/datasets/pear_on_plate_v1_curated/meta/* \
   /media/data_18tb/workspace/model_weights/lerobot/unitreerobotics/pear_on_plate_v1_curated/meta/
 
@@ -238,13 +238,13 @@ Step 13: Open-Loop Evaluation (Sanity Check)
 Before deploying the model to the physical robot, run an open-loop evaluation to ensure the predicted trajectories match the recorded ground truth.
 Bash
 
-# Navigate to the correct GR00T code repository
+Navigate to the correct GR00T code repository
 cd /media/data_18tb/workspace/gr00t/Isaac-GR00T
 
-# Create a folder for the output plots
+Create a folder for the output plots
 mkdir -p /media/data_18tb/workspace/gr00t/eval_results/pear_8rel_eval
 
-# Run the evaluation script
+Run the evaluation script
 uv run python gr00t/eval/open_loop_eval_v2.py \
     --dataset-path /media/data_18tb/workspace/model_weights/lerobot/unitreerobotics/pear_on_plate_v1_curated \
     --embodiment-tag NEW_EMBODIMENT \
