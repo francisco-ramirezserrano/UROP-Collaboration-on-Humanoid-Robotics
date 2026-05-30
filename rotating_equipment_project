@@ -1,1 +1,31 @@
+Deploy Autonomous robot for scientific exploration
+Teaching a motion primitive - Turn knob
+Teleop robot to get training data. Feed data into Gr00t to fine tune general robotic model. Run inference with the robot turning knob on its own
+Initial unaligned setup. call motion primitive on robot. Measure state of alignment. Stop.
+Acquire hardware that has highest chance of a succesful demo - some of type of crank with a large enough radius for the dex3 hands to rotate
+record 50 demos
+finetune model
+run inference loop
+Goals:
+rotate scientific equipment
+understand gr00t deployment by going through the entire pipline
+get feasible hand crank for dex3 hands to turn
+make sure teleop stack works
+teleop robot to turn crank 50 times controlling for lighting, setting,
+process data
+finetune VLA
+deploy VLA on robot
+gather demos and training stats
+write up process on publish on github
 
+Questions for further research
+Lerobot is the robot format
+RTX 4080 Ti vs RTX Ada 6000 GPU understand
+running inference meaning
+2-3 people for teleop is useful
+keep consistent: lighting, background, repeatable mvt, smooth teleop, robot position constant
+networking meaning
+camera streaming on robot
+safe wifi for ssh
+look at loss going down for gut check
+diagnostics as well
