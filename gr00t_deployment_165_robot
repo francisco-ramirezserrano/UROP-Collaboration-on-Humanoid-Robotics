@@ -1,2 +1,4 @@
 1.) start robot, make sure connected to router and battery in, go through zero torque mode, damping mode, standing mode, regular mode, ssh into robot, 
 start image server on webRTC: on unitree robot: conda activate teleimager, teleimager-server --cf to find cameras and update config file, teleimager-server to stream
+3d printed parts are found here
+https://github.com/unitreerobotics/xr_teleoperate/blob/main/Device.md 
