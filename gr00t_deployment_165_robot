@@ -2,3 +2,4 @@
 start image server on webRTC: on unitree robot: conda activate teleimager, teleimager-server --cf to find cameras and update config file, teleimager-server to stream
 3d printed parts are found here
 https://github.com/unitreerobotics/xr_teleoperate/blob/main/Device.md 
+connect via ethernet from robot to router and teleoperate works
