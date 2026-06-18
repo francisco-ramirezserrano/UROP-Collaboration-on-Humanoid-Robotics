@@ -12,6 +12,7 @@ connect via ethernet from robot to router and solves the networking issues with 
 known that the ssh breaks out from the robot after some time, i.e. 15 mins. not sure how to continue to keep the server alive
 
 need to figure out how to connect meta quest to teleop the robot
+must connect headset first before connecting robot to the g1 router wifi password is on the bottom of the vr headset
 curently can see the camera images from the head camera on https://192.168.123.118:8012/?ws=wss://192.168.123.118:8012 vuer modele
 
 teleop script with some of the right options: the record is not true so can't record yet
