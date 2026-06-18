@@ -29,3 +29,4 @@ python teleop_hand_and_arm.py   --input-mode hand --display-mode immersive   --a
 --task-desc "Teleoperated Unitree G1_29 with Dex3 to rotate crank 90 degrees. Narrow-domain collection with fixed scene and consistent setup."   
 --task-steps "1. Start from home pose; 2. Reach to the crank; 3. Grasp the crank; 4. rotate the crank; 5. rotate until 90 degrees; 6. Release; 7. Retract."
 
+current problems with g1: arms don't go all the way up, one of the thumb joints is angled incorrectly, sometimes the robot arms go up and down randomly
