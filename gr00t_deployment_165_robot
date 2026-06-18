@@ -1,6 +1,8 @@
 1.) start robot, make sure connected to router and battery in, go through zero torque mode, damping mode, standing mode, regular mode, ssh into robot, 
 start image server on webRTC: on unitree robot: conda activate teleimager, 
 teleimager-server --cf to find cameras and update config file, make sure that head cam and wrist cams are at appropriate ip address i.e. 60001 for head 
+./start_teleimager.sh is a new script that dynamically finds the right physical paths for each of the cams to make sure its the right ones. 
+should be able to run this script instead of manually finding the physical paths again
 teleimager-server to stream
 
 3d printed parts are found here
