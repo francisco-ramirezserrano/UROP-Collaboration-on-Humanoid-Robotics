@@ -25,5 +25,7 @@ press r and the robot should follow my hand positions
 
 teleop script with some of the right options:
 python teleop_hand_and_arm.py   --input-mode hand --display-mode immersive   --arm G1_29 --ee dex3   --img-server-ip 192.168.123.165   --network-interface enp6s0 --record
-
+--task-dir "rotate_crank_v1"   --task-name "rotate crank"   --task-goal "rotate the crank 90 degrees."   
+--task-desc "Teleoperated Unitree G1_29 with Dex3 to rotate crank 90 degrees. Narrow-domain collection with fixed scene and consistent setup."   
+--task-steps "1. Start from home pose; 2. Reach to the crank; 3. Grasp the crank; 4. rotate the crank; 5. rotate until 90 degrees; 6. Release; 7. Retract."
 
