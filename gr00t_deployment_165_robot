@@ -1,21 +1,29 @@
-1.) start robot, make sure connected to router and battery in, go through zero torque mode, damping mode, standing mode, regular mode, ssh into robot, 
-start image server on webRTC: on unitree robot: conda activate teleimager, 
-teleimager-server --cf to find cameras and update config file, make sure that head cam and wrist cams are at appropriate ip address i.e. 60001 for head 
+1.) start robot, make sure connected to router and the battery is in, go through zero torque mode, damping mode, standing mode, regular mode, ssh into robot, 
+start image server on webRTC: on unitree robot: conda activate teleimager cati, 
+teleimager-server --cf to find cameras and update config file, make sure that head cam and wrist cams are at appropriate ip address i.e. 60001 for head, 
+unplug and replug head camera for trouble shooting
+
+webRTC stream at this address, change the 60003 to 60001,60002 for other cameras https://192.168.123.165:60003/
+
 ./start_teleimager.sh is a new script that dynamically finds the right physical paths for each of the cams to make sure its the right ones. 
 should be able to run this script instead of manually finding the physical paths again
+
 teleimager-server to stream
 
 3d printed parts are found here
 https://github.com/unitreerobotics/xr_teleoperate/blob/main/Device.md 
+
 connect via ethernet from robot to router and solves the networking issues with the cyclonedds ps not discovering entities
 
 known that the ssh breaks out from the robot after some time, i.e. 15 mins. not sure how to continue to keep the server alive
 
 need to figure out how to connect meta quest to teleop the robot
-must connect headset first before connecting robot to the g1 router wifi password is on the bottom of the vr headset
-curently can see the camera images from the head camera on https://192.168.123.118:8012/?ws=wss://192.168.123.118:8012 vuer modele
+must connect headset first before connecting robot to the g1 router wifi - password is on the bottom of the router
+curently can see the camera images from the head camera on https://192.168.123.118:8012/?ws=wss://192.168.123.118:8012 navigate to this website on the quest
+enter vr mode and don't need joysticks for hand tracking
+press r and the robot should follow my hand positions
 
-teleop script with some of the right options: the record is not true so can't record yet
-python teleop_hand_and_arm.py   --input-mode hand --display-mode immersive   --arm G1_29 --ee dex3   --img-server-ip 192.168.123.165   --network-interface enp6s0
+teleop script with some of the right options:
+python teleop_hand_and_arm.py   --input-mode hand --display-mode immersive   --arm G1_29 --ee dex3   --img-server-ip 192.168.123.165   --network-interface enp6s0 --record
 
 
