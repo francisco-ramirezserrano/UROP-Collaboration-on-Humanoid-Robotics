@@ -1,5 +1,12 @@
 1.) start robot, make sure connected to router and battery in, go through zero torque mode, damping mode, standing mode, regular mode, ssh into robot, 
-start image server on webRTC: on unitree robot: conda activate teleimager, teleimager-server --cf to find cameras and update config file, teleimager-server to stream
+start image server on webRTC: on unitree robot: conda activate teleimager, 
+teleimager-server --cf to find cameras and update config file, make sure that head cam and wrist cams are at appropriate ip address i.e. 60001 for head 
+teleimager-server to stream
+
 3d printed parts are found here
 https://github.com/unitreerobotics/xr_teleoperate/blob/main/Device.md 
-connect via ethernet from robot to router and teleoperate works
+connect via ethernet from robot to router and solves the networking issues with the cyclonedds ps not discovering entities
+
+need to figure out how to connect meta quest to teleop the robot
+curently can see the camera images from the head camera on https://192.168.123.118:8012/?ws=wss://192.168.123.118:8012 vuer modele
+
