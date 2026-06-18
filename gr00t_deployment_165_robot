@@ -7,6 +7,8 @@ teleimager-server to stream
 https://github.com/unitreerobotics/xr_teleoperate/blob/main/Device.md 
 connect via ethernet from robot to router and solves the networking issues with the cyclonedds ps not discovering entities
 
+known that the ssh breaks out from the robot after some time, i.e. 15 mins. not sure how to continue to keep the server alive
+
 need to figure out how to connect meta quest to teleop the robot
 curently can see the camera images from the head camera on https://192.168.123.118:8012/?ws=wss://192.168.123.118:8012 vuer modele
 
