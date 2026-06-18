@@ -10,3 +10,7 @@ connect via ethernet from robot to router and solves the networking issues with 
 need to figure out how to connect meta quest to teleop the robot
 curently can see the camera images from the head camera on https://192.168.123.118:8012/?ws=wss://192.168.123.118:8012 vuer modele
 
+teleop script with some of the right options: the record is not true so can't record yet
+python teleop_hand_and_arm.py   --input-mode hand --display-mode immersive   --arm G1_29 --ee dex3   --img-server-ip 192.168.123.165   --network-interface enp6s0
+
+
