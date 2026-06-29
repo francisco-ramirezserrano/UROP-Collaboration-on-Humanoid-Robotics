@@ -41,3 +41,15 @@ see how well the robot generalizes
 refresh on the laundry folding lerobot paper to incorporate reward advantage based conditioning model. 
 categorize failure modes. 
 upload trained dataset of turning crank onto github or lerobot so other developers can use
+
+3d printed wrist mounts with adjustable vantage point to position wrist camera
+Documented universal crank apparatus to test g1 unitree turning crank capabilities
+Many degrees of freedom including turning radius, thickness of handle, angle handle is at with respect to the horizontal (pitch), x and y position of where crank apparatus is located
+Can choose how many of these degrees of freedom actually need and whether discrete or continuous measurements
+Likely build in makerspace either end of this week or later with the help of jiaming
+Test out various existing cranks to identify failure points for g1 dex 3 hand teleop
+Hypothesize limited handle thicknesses that work, turning radius, and placement of crank due to limited working space/field of view
+Either try to teleop these cranks to see if they are plausible, maybe collect these data samples and try fine tuning the model to see if it works out
+Need to research which hyperparameters are good to go for fine tuning such as training steps, epochs
+Also convert the data to appropriate form for lerobot, get good practice doing this
+
