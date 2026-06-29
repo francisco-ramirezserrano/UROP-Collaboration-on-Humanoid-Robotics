@@ -30,3 +30,14 @@ python teleop_hand_and_arm.py   --input-mode hand --display-mode immersive   --a
 --task-steps "1. Start from home pose; 2. Reach to the crank; 3. Grasp the crank; 4. rotate the crank; 5. rotate until 90 degrees; 6. Release; 7. Retract."
 
 current problems with g1: arms don't go all the way up, one of the thumb joints is angled incorrectly, sometimes the robot arms go up and down randomly
+
+bottlenecks/problems to solve:
+CAD/3D print wrist cams mounts
+find rotating apparatus to run teleop demonstrations on. could be a crank we find or build/3D print
+collect demos of robot doing task
+
+fine tune gr00t VLA model on data
+see how well the robot generalizes
+refresh on the laundry folding lerobot paper to incorporate reward advantage based conditioning model. 
+categorize failure modes. 
+upload trained dataset of turning crank onto github or lerobot so other developers can use
