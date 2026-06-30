@@ -1,7 +1,9 @@
 1.) start robot, make sure connected to router and the battery is in, go through zero torque mode, damping mode, standing mode, regular mode, ssh into robot, 
 start image server on webRTC: on unitree robot: conda activate teleimager cati, 
-teleimager-server --cf to find cameras and update config file, make sure that head cam and wrist cams are at appropriate ip address i.e. 60001 for head, 
-unplug and replug head camera for trouble shooting
+teleimager-server --cf to find cameras and update config file by copying all the respective physical paths to the cam_config_.yaml file, 
+make sure that head cam and wrist cams are at appropriate ip address i.e. 60001 for head, 
+unplug and replug head camera for trouble shooting and unplug all cameras
+
 
 webRTC stream at this address, change the 60003 to 60001,60002 for other cameras https://192.168.123.165:60003/
 
@@ -25,6 +27,9 @@ https://192.168.123.118:8012/?ws=wss://192.168.123.118:8012
 navigate to this website on the quest
 ip address must match ifconfig 
 enp6s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500  inet 192.168.123.118
+
+changed teleop_hand_and_arm.py file to move arms to ready position despite no end effector option because we currently don't have the dex3 hands on the robot
+
 enter vr mode and don't need joysticks for hand tracking
 press r and the robot should follow my hand positions
 
