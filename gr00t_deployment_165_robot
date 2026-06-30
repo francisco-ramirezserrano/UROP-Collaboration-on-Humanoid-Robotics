@@ -7,6 +7,7 @@ webRTC stream at this address, change the 60003 to 60001,60002 for other cameras
 
 ./start_teleimager.sh is a new script that dynamically finds the right physical paths for each of the cams to make sure its the right ones. 
 should be able to run this script instead of manually finding the physical paths again
+on the 164 robot, i plugged in left wrist cam to the left usb and right wrist cam to right usb
 
 teleimager-server to stream
 
@@ -18,8 +19,12 @@ connect via ethernet from robot to router and solves the networking issues with 
 known that the ssh breaks out from the robot after some time, i.e. 15 mins. not sure how to continue to keep the server alive
 
 need to figure out how to connect meta quest to teleop the robot
-must connect headset first before connecting robot to the g1 router wifi - password is on the bottom of the router
-curently can see the camera images from the head camera on https://192.168.123.118:8012/?ws=wss://192.168.123.118:8012 navigate to this website on the quest
+must connect headset to g1 router wifi first before starting robot  - password is on the bottom of the router
+curently can see the camera images from the head camera on 
+https://192.168.123.118:8012/?ws=wss://192.168.123.118:8012 
+navigate to this website on the quest
+ip address must match ifconfig 
+enp6s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500  inet 192.168.123.118
 enter vr mode and don't need joysticks for hand tracking
 press r and the robot should follow my hand positions
 
@@ -42,14 +47,19 @@ refresh on the laundry folding lerobot paper to incorporate reward advantage bas
 categorize failure modes. 
 upload trained dataset of turning crank onto github or lerobot so other developers can use
 
-3d printed wrist mounts with adjustable vantage point to position wrist camera
-Documented universal crank apparatus to test g1 unitree turning crank capabilities
+3d printed wrist mounts with adjustable vantage point to position wrist camera at various distances to capture full finger movement of the dex 3 hands
+
+
+
+Diagramed universal crank apparatus to test g1 unitree turning crank capabilities
 Many degrees of freedom including turning radius, thickness of handle, angle handle is at with respect to the horizontal (pitch), x and y position of where crank apparatus is located
 Can choose how many of these degrees of freedom actually need and whether discrete or continuous measurements
 Likely build in makerspace either end of this week or later with the help of jiaming
+
 Test out various existing cranks to identify failure points for g1 dex 3 hand teleop
 Hypothesize limited handle thicknesses that work, turning radius, and placement of crank due to limited working space/field of view
 Either try to teleop these cranks to see if they are plausible, maybe collect these data samples and try fine tuning the model to see if it works out
 Need to research which hyperparameters are good to go for fine tuning such as training steps, epochs
-Also convert the data to appropriate form for lerobot, get good practice doing this
+
+Also convert the data to appropriate form for gr00t flavored lerobot, get good practice doing this
 
