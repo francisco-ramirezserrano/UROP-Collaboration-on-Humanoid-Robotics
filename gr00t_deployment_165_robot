@@ -66,5 +66,47 @@ Hypothesize limited handle thicknesses that work, turning radius, and placement 
 Either try to teleop these cranks to see if they are plausible, maybe collect these data samples and try fine tuning the model to see if it works out
 Need to research which hyperparameters are good to go for fine tuning such as training steps, epochs
 
+Stage 0
+Record teleop of robot turning hand crank
+Finetune gr00t with trajectories
+Deploy on g1
+Robot turns crank
+
+Use a live angle encoder to measure how much the robot turned
+Once the encoder reaches the desired angle amount, robot stops turning
+One clip of a turn and chop up into many segments that correspond to turning 5 degrees, 10 degrees, etc by referencing angle encoder
+For deployment
+Takes in an image frame and we query nano banana or another VLM to see if desired angle has been reached
+
+problems/concerns
+Turning CW/CCW
+How many revolutions, how to train VLA to do that
+Continuous tasks, start frame looks like end frame how to deal with that
+
+
+
+Stage 1
+Modeling after AnySlot architecture
+For training, have a desired goal angle, have nano banana place a crank at that location, then train VLA to go to that location. I.e. prompt for VLA is turn hand crank to end crank position
+The way AnySlot did was using simulated trajectories with goal sphere in the desired slot
+Deploy
+First prompt: turn 20 degrees
+Nanobannana generates an end crank position 20 degrees from where the crank is at 
+Robot should ideally know how to navigate to this end position because model has been finetuned
+Stage 2
+World Action Model
+
+Deploy
+Dream trajectories (whole) only take one action chunk forward
+
+
+
+Problems with robot currently:
+Wrists fail to initialize: could be no power or some other issue
+Teleop code broke so can’t teleop robot anymore
+It is very difficult to actually turn a crank using a robot without having control of the fingers. Lots of singularities with the robot joint movements that prevent it from seamlessly executing task
+Much more difficult than initially expected to turn crank in the three main orientations
+
+
 Also convert the data to appropriate form for gr00t flavored lerobot, get good practice doing this
 
