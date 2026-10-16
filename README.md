@@ -1,3 +1,8 @@
+
+
+https://github.com/user-attachments/assets/e3b45621-4262-4dcc-91b7-bb9189d1883a
+
+
 # GR00T Crank Turning on a Unitree Humanoid
 
 ## Motivation
