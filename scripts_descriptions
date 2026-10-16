@@ -1,0 +1,5 @@
+run_gr00t_server_trt.py — Starts a GR00T inference server that receives robot observations and returns predicted action sequences. Supports standard PyTorch inference or replacement of the action head’s diffusion transformer with a prebuilt TensorRT engine. It also supports replaying recorded dataset actions.
+eval_robot_from_gr00t_finetuned_wrists_motor_motion_home_camview_pause_RTC_gpt.py — Connects the robot’s cameras, arm controllers, and Dex3 hands to the GR00T server. Sends images, joint states, and a task instruction to obtain action sequences, then optionally executes them on the robot. Includes asynchronous inference with overlapping action chunks, motion smoothing, camera visualization, timing diagnostics, and keyboard controls for homing, running, pausing, and stopping.
+
+
+
