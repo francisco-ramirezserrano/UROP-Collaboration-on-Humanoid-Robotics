@@ -61,3 +61,9 @@ The following readings offer perspectives that may inform future development of 
 - [LeRobot robot folding](https://huggingface.co/spaces/lerobot/robot-folding): A deployment-focused example of learning a new robotic task.
 - [Physical Intelligence π0.7](https://www.pi.website/blog/pi07): Skill composition.
 - [TRI’s large behavior model work](https://toyotaresearchinstitute.github.io/lbm1/): Challenging manipulation tasks and data collection.
+
+
+
+https://github.com/user-attachments/assets/9e6dbe43-99bc-440e-a9da-7a8f968b7087
+
+
