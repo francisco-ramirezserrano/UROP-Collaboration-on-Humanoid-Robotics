@@ -1,74 +1,104 @@
-# Crank-Turning Project Plan
+# Deployment and Teleoperation Notes
 
-## Motivation and scope
+This document summarizes the deployment configuration, teleoperation procedures, hardware modifications, and technical issues recorded during the project. The procedures have not been revalidated against the current system. The recorded configurations include both robot 164 and robot 165; the applicable robot and network configuration must therefore be confirmed before executing the commands.
 
-The project began with the goal of automating tedious turning of optical laboratory equipment. It also asks whether state-of-the-art robot-learning models can be reproduced locally and adapted to new tasks, especially cyclical manipulation.
+## 1. Robot Startup and Network Connection
 
-Small knobs proved unsuitable for the Dex3 hands in the initial exploration. Crank turning became a proof of concept for rotational and cyclical tasks, with some connection to the original optical-equipment motivation.
+The recorded startup sequence was:
 
-## Completed work and current boundary
+1. Transition through zero-torque mode, damping mode, standing mode, and regular mode.
+2. Establish an SSH connection to the robot.
 
-- Built a makeshift crank test bed.
-- Updated wrist-camera mounts with rails for a higher viewpoint.
-- Set up teleoperation and began recording demonstrations.
-- Demonstrated a partial crank turn while the Dex3 hands were not functioning; a video exists.
-- Recorded setup procedures and hardware/software problems.
+Connecting the robot to the router by Ethernet resolved an observed CycloneDDS entity-discovery issue.
 
-The demonstrations were not usable for training. Data conversion, GR00T fine-tuning, and autonomous inference have not been performed. 
+SSH sessions were reported to disconnect after approximately 15 minutes. Maintaining a persistent SSH connection remains an unresolved operational requirement.
 
-## Original intended pipeline
+## 2. Camera Discovery and Streaming
 
-1. Obtain a crank suitable for the Dex3 hands and establish working teleoperation.
-2. Collect task demonstrations; the original target was 50 demonstrations.
-3. Keep lighting, background, robot position, and task setup consistent, with smooth and repeatable teleoperation.
-4. Convert recordings to the GR00T-compatible LeRobot format.
-5. Fine-tune GR00T and record training statistics.
-6. Run inference on the robot and evaluate crank turning and generalization.
-7. Document the process and, if a usable dataset is produced, share it through GitHub or LeRobot.
+Camera discovery and streaming used the `teleimager` Conda environment:
+
+```bash
+conda activate teleimager
+teleimager-server --cf
+```
+
+The discovery command was used to identify the cameras. Their physical paths were then copied into the relevant `cam_config_*.yaml` configuration file. The exact configuration filename was not recorded.
 
 
-## Proposed adjustable crank apparatus
+The recorded server command was:
 
-An adjustable apparatus was diagrammed but not built. Proposed variables included:
+```bash
+teleimager-server
+```
 
-- Turning radius.
-- Handle thickness.
-- Handle pitch relative to horizontal.
-- Crank position in x and y.
+Recorded WebRTC camera addresses:
 
-Testing existing cranks was proposed to identify feasible handle dimensions and positions given the hand's working space and camera view.
-
-## Proposed experiments and evaluation questions
-
-The following ideas remain unimplemented:
-
-- Categorize task failure modes and compare crank orientations.
-- Investigate suitable training steps, epochs, and other fine-tuning parameters.
-- Use an angle encoder to measure rotation and stop at a desired angle.
-- Segment a recorded turn into examples corresponding to different angular displacements using encoder measurements.
-- Explore image-based checks of whether the desired angle has been reached.
-
-Open task questions include clockwise versus counterclockwise turning, specifying multiple revolutions, and handling cycles in which the starting and ending images look similar.
-
-## Research directions
-
-These readings offer other perspectives on implementing the GR00T crank project. They have not been implemented here, and no approach has been selected as the next step.
-
-| Reading | Interest stated for this project |
+| Address | Recorded association |
 | --- | --- |
-| [Generalist GEN-1.5](https://generalistai.com/blog/gen-1.5) | High-quality data and in-context learning |
-| [LeRobot robot folding](https://huggingface.co/spaces/lerobot/robot-folding) | Deployment-focused task learning |
-| [Physical Intelligence pi0.7](https://www.pi.website/blog/pi07) | Combining existing skills to perform a new skill |
-| [TRI large behavior model](https://toyotaresearchinstitute.github.io/lbm1/) | Challenging laboratory tasks and factory data collection |
+| `https://192.168.123.165:60001/` | Head camera |
+| `https://192.168.123.165:60002/` | Other camera; wrist-side mapping not recorded |
+| `https://192.168.123.165:60003/` | Other camera; wrist-side mapping not recorded |
 
-Other explored topics include DreamZero/world action models, wearable data collection from Sunday Robotics and similar efforts, and AnySlot's generated goal images.
+Unplugging and reconnecting the head camera, or disconnecting all cameras, was noted as a troubleshooting action. On robot 164, the left wrist camera was connected to the left USB port and the right wrist camera to the right USB port.
 
-### Earlier exploratory proposals
+## 3. Quest Connection and Teleoperation
 
-The original notes proposed an AnySlot-inspired approach using a generated image of a desired crank position as a goal. They also proposed exploring a world action model that generates a trajectory while executing only the next action chunk. Both remain conceptual proposals.
+The notes specify connecting the Quest headset to the G1 router's Wi-Fi before starting the robot. The router password is located on its underside.
 
-Other ideas in the notes include reward/advantage conditioning, SARM, and benchmarking other open-source models. Their implementation and relevance to the present setup have not been fully explored.
+The recorded Quest browser address was:
 
-## Immediate direction
+```text
+https://192.168.123.118:8012/?ws=wss://192.168.123.118:8012
+```
 
-Immediate steps remain undecided. Investigating unresolved problems in the robotics pipeline is one possibility. The hardware observations and uncertainties are recorded in [deployment notes](deployment_notes.md).
+The host IP must match the applicable network configuration. The recorded host interface was `enp6s0`, with address `192.168.123.118`.
+
+Teleoperation used VR mode with hand tracking; joysticks were not required. The recorded procedure specifies pressing `r` to initiate tracking of the operator's hand positions. The teleoperation environment was tentatively recorded as `tv`, but this was not confirmed.
+
+`teleop_hand_and_arm.py` was modified to move the arms to the ready position even without an end-effector option, during a period when the Dex3 hands were not installed.
+
+## 4. Recorded Demonstration Command
+
+The command below consolidates the recorded demonstration-collection options. It has not been revalidated against the current script. The specified 90-degree rotation describes the intended task; successful execution of that rotation was not demonstrated.
+
+```bash
+python teleop_hand_and_arm.py \
+  --input-mode hand \
+  --display-mode immersive \
+  --arm G1_29 \
+  --ee dex3 \
+  --img-server-ip 192.168.123.165 \
+  --network-interface enp6s0 \
+  --record \
+  --task-dir "rotate_crank_v1" \
+  --task-name "rotate crank" \
+  --task-goal "rotate the crank 90 degrees." \
+  --task-desc "Teleoperated Unitree G1_29 with Dex3 to rotate crank 90 degrees. Narrow-domain collection with fixed scene and consistent setup." \
+  --task-steps "1. Start from home pose; 2. Reach to the crank; 3. Grasp the crank; 4. Rotate the crank; 5. Rotate until 90 degrees; 6. Release; 7. Retract."
+```
+
+Demonstration recording was started, but the resulting recordings were not usable for training. No data conversion, fine-tuning, or autonomous inference followed.
+
+## 5. Hardware Modifications
+
+Wrist-camera mounts were updated with rails so the cameras could be moved upward for a higher viewpoint. Earlier notes identified insufficient mount sturdiness as an issue requiring iteration.
+
+A makeshift crank test bed was constructed to investigate the feasibility of crank manipulation. The proposed adjustable apparatus was not built.
+
+Reference for teleoperation-related printed parts: [Unitree XR teleoperation device documentation](https://github.com/unitreerobotics/xr_teleoperate/blob/main/Device.md).
+
+## 6. Observed Issues and Unresolved Causes
+
+| Observation | Status or interpretation |
+| --- | --- |
+| Dex3 hands were not functioning during crank-turning attempts | Videos document partial turns at several crank orientations. Crank turning was not tested after the hands were repaired. |
+| Elbow singularities during crank manipulation | Observed with non-functioning hands; suspected to reflect an arm limitation independent of hand functionality. This interpretation remains unverified. |
+| Wrist-initialization failures | Cause unresolved; insufficient power was considered a possible explanation. |
+| Incorrectly angled thumb joint | Recorded hardware issue. |
+| Limited arm elevation | Recorded motion limitation. |
+| Occasional unexpected vertical arm motion | Cause unresolved. |
+| Subsequent teleoperation-code failure | Failure recorded; cause unresolved. |
+| Difficulty turning the crank in three principal orientations | Reliable execution was not achieved. |
+| SSH disconnections after approximately 15 minutes | Persistent server operation remains unresolved. |
+
+These issues prevented consistent collection of usable demonstrations. Data conversion, GR00T fine-tuning, and autonomous inference have not been performed. The observations therefore characterize barriers to task preparation and data collection; they do not constitute an evaluation of GR00T performance.
