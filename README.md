@@ -12,8 +12,13 @@ The planned GR00T vision-language-action (VLA) pipeline is:
 
 1. Record teleoperated crank-turning demonstrations.
 2. Convert the demonstrations to the data format required by GR00T.
-3. Fine-tune GR00T on the task.
+3. Fine-tune GR00T VLA on the task.
 4. Deploy the model on the robot and evaluate autonomous crank turning.
+
+## Goals:
+1. Run through the entire Gr00t fine tuning pipline from start to finish on a new task to replicate paper and build intuition on how to train models
+2. Design a partial cyclic benchmark based on my observations of failure modes.
+3. Upload completed datasets into the Lerobot community for other researchers to build off of
 
 ## Current status
 
