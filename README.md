@@ -32,13 +32,13 @@ The planned GR00T vision-language-action (VLA) pipeline is:
 | GR00T fine-tuning | Not performed |
 | Autonomous inference | Not performed |
 
-A video exists of the partial crank-turning attempt. A video link has not yet been added to this documentation.
+Videos exists of the partial crank-turning attempt for various angles.
 
 ## Challenges and outcomes
 
-Non-functioning Dex3 hands and elbow singularities limited crank manipulation and prevented consistent demonstration collection. The singularities were observed while the hands were not functioning. They are suspected to reflect an arm limitation independent of the hands, but that interpretation has not been separately established.
+Non-functioning Dex3 hands and elbow singularities limited crank manipulation and prevented consistent demonstration collection.  They are suspected to reflect an arm limitation independent of the hands. We were unable to try using the robot to turn the crank after the hands were fixed.
 
-Additional notes record wrist-initialization failures, an incorrectly angled thumb joint, limited arm elevation, occasional unexpected arm motion, and a later teleoperation-code failure. Camera streaming, network configuration, and SSH disconnections also required troubleshooting.
+wrist-initialization failures, an incorrectly angled thumb joint, limited arm elevation, occasional unexpected arm motion, and a later teleoperation-code failure. 
 
 The project has not yet evaluated GR00T's performance on crank turning. The work so far concerns task preparation, teleoperation, and the barriers to obtaining usable demonstrations.
 
@@ -47,8 +47,8 @@ The project has not yet evaluated GR00T's performance on crank turning. The work
 - [Deployment notes](deployment_notes.md): recorded setup procedures, configuration details, and unresolved issues.
 - [Project plan](project_plan.md): objectives, proposed experiments, and research directions, separated from completed work.
 
-## Research directions
+## Future Research directions
 
-Readings provide alternative perspectives on implementing the project: [Generalist GEN-1.5](https://generalistai.com/blog/gen-1.5) for high-quality data and in-context learning; [LeRobot robot folding](https://huggingface.co/spaces/lerobot/robot-folding) for deployment-focused task learning; [Physical Intelligence pi0.7](https://www.pi.website/blog/pi07) for skill composition; and [TRI's large behavior model work](https://toyotaresearchinstitute.github.io/lbm1/) for challenging tasks and data collection.
+Some readings of interest that provide new directions for future projects: [Generalist GEN-1.5](https://generalistai.com/blog/gen-1.5) for high-quality data and in-context learning; [LeRobot robot folding](https://huggingface.co/spaces/lerobot/robot-folding) for deployment-focused task learning; [Physical Intelligence pi0.7](https://www.pi.website/blog/pi07) for skill composition; and [TRI's large behavior model work](https://toyotaresearchinstitute.github.io/lbm1/) for challenging tasks and data collection.
 
-These approaches have not been implemented here. Immediate next steps remain undecided.
+
