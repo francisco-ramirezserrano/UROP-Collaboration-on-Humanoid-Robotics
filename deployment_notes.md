@@ -6,17 +6,16 @@ These notes reorganize the recorded setup procedures and troubleshooting observa
 
 The recorded startup sequence was:
 
-1. Insert the battery and connect the robot to the router.
-2. Go through zero-torque mode, damping mode, standing mode, and regular mode.
-3. SSH into the robot.
+1. Go through zero-torque mode, damping mode, standing mode, and regular mode.
+2. SSH into the robot.
 
 Connecting the robot to the router by Ethernet resolved an observed CycloneDDS entity-discovery issue.
 
-SSH sessions were reported to disconnect after approximately 15 minutes. Keeping the camera server running after a disconnect was an unresolved question.
+SSH sessions were reported to disconnect after approximately 15 minutes. Need to keep ssh session online.
 
 ## 2. Camera discovery and streaming
 
-The notes identify a `teleimager` Conda environment; the original environment line also contains the unexplained text `cati`.
+The notes identify a `teleimager` Conda environment; `conda activate teleimager`.
 
 ```bash
 conda activate teleimager
@@ -25,11 +24,6 @@ teleimager-server --cf
 
 The discovery command was used to find the cameras and copy their physical paths into the relevant `cam_config_*.yaml` configuration. The exact configuration filename was not recorded.
 
-The project notes describe `start_teleimager.sh` as a script that dynamically finds the camera physical paths, avoiding repeated manual discovery:
-
-```bash
-./start_teleimager.sh
-```
 
 The recorded server command was:
 
@@ -89,7 +83,7 @@ Demonstration recording was started, but the resulting recordings were not usabl
 
 Wrist-camera mounts were updated with rails so the cameras could be moved upward for a higher viewpoint. Earlier notes identified insufficient mount sturdiness as an issue requiring iteration.
 
-A makeshift crank test bed was built. It should not be confused with the proposed adjustable crank apparatus in [the project plan](project_plan.md).
+A makeshift crank test bed was built to test how well the robot would do on turning tasks
 
 Reference for teleoperation-related printed parts: [Unitree XR teleoperation device documentation](https://github.com/unitreerobotics/xr_teleoperate/blob/main/Device.md).
 
@@ -98,7 +92,7 @@ Reference for teleoperation-related printed parts: [Unitree XR teleoperation dev
 | Observation | Status or interpretation |
 | --- | --- |
 | Dex3 hands not functioning during crank attempt | Video shows a partial turn under this condition |
-| Elbow singularities during crank manipulation | Observed with non-functioning hands; suspected arm limitation independent of hands, not separately established |
+| Elbow singularities during crank manipulation | Observed with non-functioning hands; suspected arm limitation independent of hands |
 | Wrists fail to initialize | Cause unresolved; lack of power was a possibility in the notes |
 | One thumb joint angled incorrectly | Recorded hardware issue |
 | Arms do not rise fully | Recorded motion limitation |
