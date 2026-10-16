@@ -14,7 +14,7 @@ Small knobs proved unsuitable for the Dex3 hands in the initial exploration. Cra
 - Demonstrated a partial crank turn while the Dex3 hands were not functioning; a video exists.
 - Recorded setup procedures and hardware/software problems.
 
-The demonstrations were not usable for training. Data conversion, GR00T fine-tuning, and autonomous inference have not been performed. Immediate next steps are not yet fixed.
+The demonstrations were not usable for training. Data conversion, GR00T fine-tuning, and autonomous inference have not been performed. 
 
 ## Original intended pipeline
 
@@ -26,7 +26,6 @@ The demonstrations were not usable for training. Data conversion, GR00T fine-tun
 6. Run inference on the robot and evaluate crank turning and generalization.
 7. Document the process and, if a usable dataset is produced, share it through GitHub or LeRobot.
 
-This is the original plan, not a statement of completed stages or a confirmed immediate schedule.
 
 ## Proposed adjustable crank apparatus
 
@@ -37,7 +36,7 @@ An adjustable apparatus was diagrammed but not built. Proposed variables include
 - Handle pitch relative to horizontal.
 - Crank position in x and y.
 
-The notes leave open which variables are necessary and whether settings should be discrete or continuous. Testing existing cranks was proposed to identify feasible handle dimensions and positions given the hand's working space and camera view.
+Testing existing cranks was proposed to identify feasible handle dimensions and positions given the hand's working space and camera view.
 
 ## Proposed experiments and evaluation questions
 
@@ -68,7 +67,7 @@ Other explored topics include DreamZero/world action models, wearable data colle
 
 The original notes proposed an AnySlot-inspired approach using a generated image of a desired crank position as a goal. They also proposed exploring a world action model that generates a trajectory while executing only the next action chunk. Both remain conceptual proposals.
 
-Other ideas in the notes include reward/advantage conditioning, SARM, and benchmarking other open-source models. Their implementation and relevance to the present setup have not been established.
+Other ideas in the notes include reward/advantage conditioning, SARM, and benchmarking other open-source models. Their implementation and relevance to the present setup have not been fully explored.
 
 ## Immediate direction
 
